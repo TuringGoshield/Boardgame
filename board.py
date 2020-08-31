@@ -22,7 +22,7 @@ class Board:
                 piece = self.on_square((x, y))
                 bd_str = bd_str + ' '
                 if piece:
-                    bd_str = bd_str + piece.__repr__() 
+                    bd_str = bd_str + str(piece) 
                 else:
                     bd_str = bd_str + ' '
                 bd_str = bd_str + ' |' 
@@ -38,9 +38,44 @@ class Board:
     def place_piece(self, loc, piece):
         """Place a piece on a specific location."""
 
+        self._board[loc[0]][loc[1]] = piece
+
 
 class Piece:
     def __init__(self):
         """Create a new piece"""
 
-print(Board(3, 3))
+class tictactoe_Piece(Piece):
+    def __init__(self, X=False):
+        self.x_or_o = X
+
+    @staticmethod
+    def creator(X=False):
+        return tictactoe_Piece(X=X)
+
+    def __repr__(self):
+        if self.x_or_o:
+            return "X"
+        else:
+            return "O"
+
+class Game:
+    def __init__(self, board, make_piece):
+        self.board = board
+        self.make_piece = make_piece
+
+
+    def place_piece(self, pos, piece):
+        self.board.place_piece(pos, piece)
+
+    def __repr__(self):
+        return self.board.__repr__()
+
+TicTacToe = Game(board = Board(3, 3), make_piece=tictactoe_Piece.creator)
+
+TicTacToe.place_piece((0, 0), TicTacToe.make_piece(X=True))
+
+#board.place_piece((0, 0), tictactoe_Piece())
+
+
+print(TicTacToe)
