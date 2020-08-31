@@ -1,4 +1,4 @@
-# Board game structure 
+# Board game structure
 
 class Board:
     """Generic board structure"""
@@ -22,17 +22,17 @@ class Board:
                 piece = self.on_square((x, y))
                 bd_str = bd_str + ' '
                 if piece:
-                    bd_str = bd_str + str(piece) 
+                    bd_str = bd_str + str(piece)
                 else:
                     bd_str = bd_str + ' '
-                bd_str = bd_str + ' |' 
+                bd_str = bd_str + ' |'
 
             bd_str = bd_str + '\n'
             bd_str = bd_str + separator_row
         return bd_str
 
     def on_square(self, loc):
-        """Return the piece on a specific square, or list of pieces if more than one."""
+        """Return the piece on a specific square, or list of pieces if >1."""
         return self._board[loc[0]][loc[1]]
 
     def place_piece(self, loc, piece):
@@ -44,6 +44,7 @@ class Board:
 class Piece:
     def __init__(self):
         """Create a new piece"""
+
 
 class tictactoe_Piece(Piece):
     def __init__(self, X=False):
@@ -59,11 +60,11 @@ class tictactoe_Piece(Piece):
         else:
             return "O"
 
+
 class Game:
     def __init__(self, board, make_piece):
         self.board = board
         self.make_piece = make_piece
-
 
     def place_piece(self, pos, piece):
         self.board.place_piece(pos, piece)
@@ -71,11 +72,9 @@ class Game:
     def __repr__(self):
         return self.board.__repr__()
 
-TicTacToe = Game(board = Board(3, 3), make_piece=tictactoe_Piece.creator)
+
+TicTacToe = Game(board=Board(3, 3), make_piece=tictactoe_Piece.creator)
 
 TicTacToe.place_piece((0, 0), TicTacToe.make_piece(X=True))
-
-#board.place_piece((0, 0), tictactoe_Piece())
-
 
 print(TicTacToe)
